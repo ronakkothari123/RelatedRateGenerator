@@ -18,4 +18,21 @@ public class EquationNode {
     public void setRight(EquationNode right){
         this.right = right;
     }
+
+    public void setData(NodeTypes type, String data){
+        this.type = type;
+        this.data = data;
+    }
+
+    public EquationNode getLeft() {
+        return left;
+    }
+
+    public EquationNode getRight() {
+        return right;
+    }
+
+    public String getData(){
+        return data;
+    }
 }
