@@ -1,4 +1,4 @@
-package Equation;
+package com.relatedrate.Equation;
 
 public class EquationNode {
     private EquationNode left;

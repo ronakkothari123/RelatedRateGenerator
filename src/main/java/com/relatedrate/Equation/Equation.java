@@ -1,4 +1,4 @@
-package Equation;
+package com.relatedrate.Equation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
