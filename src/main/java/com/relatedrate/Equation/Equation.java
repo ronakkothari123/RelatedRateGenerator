@@ -1,14 +1,18 @@
-package Equation;
+package com.relatedrate.Equation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Equation {
     private EquationNode root;
 
     public Equation(String equation) {
         createEquation(equation);
-        System.out.println(solveEquation(this));
+    }
+
+    public Equation(){
+        System.out.println("Initialized");
     }
 
     private void createEquation(String equation){
@@ -76,34 +80,53 @@ public class Equation {
                 } else if(Arrays.equals(targetOperator, new char[]{'-', '+'})) {
                     targetOperator = new char[]{'='};
                     i = -1;
-                } else System.out.println("Breaking...");
+                }
             }
         }
-
-        System.out.println("Complete");
 
         root = nodes.get(nodes.size() - 1);
     }
 
-    private double solveEquation(Equation equation){
+    public void substituteValues(EquationNode targetNode, HashMap<String, Double> variables){
+        if(targetNode != null){
+            if(variables.containsKey(targetNode.getData()) && variables.get(targetNode.getData()) != null){
+                targetNode.setData(NodeTypes.CONSTANT_NODE, String.valueOf(variables.get(targetNode.getData())));
+            }
+            substituteValues(targetNode.getLeft(), variables);
+            substituteValues(targetNode.getRight(), variables);
+        }
+    }
+
+    public void printEquation(EquationNode node){
+        if(node != null){
+            printEquation(node.getLeft());
+            System.out.print(node.getData());
+            printEquation(node.getRight());
+        }
+    }
+
+    /*private double solveEquation() throws MultipleVariableException {
         char[] targetOperator = new char[]{'-', '+'};
 
-        inOrderTraversal(equation.getRoot());
-        System.out.println();
+        if(variableCount(root) > 1) throw new MultipleVariableException("Multiple Variables");
 
         return 20.3;
     }
 
-    private void inOrderTraversal(EquationNode node){
+    private int variableCount(EquationNode node){
         //InOrder Traversal = Left Root Right
+        int i = 0;
+
         if(node!=null){
-            inOrderTraversal(node.getLeft());
-            System.out.print(node.getData());
-            inOrderTraversal(node.getRight());
+            i += variableCount(node.getLeft());
+            if(node.getType() == NodeTypes.VARIABLE_NODE) i++;
+            i += variableCount(node.getRight());
         }
+
+        return i;
     }
 
-    /*private void printNodeList(ArrayList<EquationNode> nodes){
+    private void printNodeList(ArrayList<EquationNode> nodes){
         for(int i = 0; i < nodes.size(); i++){
             inOrderTraversal(nodes.get(i));
         } System.out.println();
@@ -113,13 +136,13 @@ public class Equation {
         public ContainsExponentException(String errorMessage) {
             super(errorMessage);
         }
-    }
+    }*/
 
     public static class MultipleVariableException extends Exception {
         public MultipleVariableException(String errorMessage) {
             super(errorMessage);
         }
-    }*/
+    }
 
     private boolean isPresent(char[] array, char target){
         for(char elem : array) {

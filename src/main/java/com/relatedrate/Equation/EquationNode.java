@@ -1,4 +1,4 @@
-package Equation;
+package com.relatedrate.Equation;
 
 public class EquationNode {
     private EquationNode left;
@@ -30,6 +30,10 @@ public class EquationNode {
 
     public EquationNode getRight() {
         return right;
+    }
+
+    public NodeTypes getType(){
+        return type;
     }
 
     public String getData(){
