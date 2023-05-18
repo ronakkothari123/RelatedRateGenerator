@@ -32,6 +32,10 @@ public class EquationNode {
         return right;
     }
 
+    public NodeTypes getType(){
+        return type;
+    }
+
     public String getData(){
         return data;
     }
