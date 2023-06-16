@@ -6,20 +6,27 @@ public class EquationNode {
     private NodeTypes type;
     private String data;
 
-    public EquationNode(NodeTypes type, String data){
+    public EquationNode(NodeTypes type, String data) {
         this.type = type;
         this.data = data;
     }
 
-    public void setLeft(EquationNode left){
+    public EquationNode(NodeTypes type, String data, EquationNode left, EquationNode right) {
+        this.type = type;
+        this.data = data;
         this.left = left;
-    }
-
-    public void setRight(EquationNode right){
         this.right = right;
     }
 
-    public void setData(NodeTypes type, String data){
+    public void setLeft(EquationNode left) {
+        this.left = left;
+    }
+
+    public void setRight(EquationNode right) {
+        this.right = right;
+    }
+
+    public void setData(NodeTypes type, String data) {
         this.type = type;
         this.data = data;
     }
@@ -32,11 +39,11 @@ public class EquationNode {
         return right;
     }
 
-    public NodeTypes getType(){
-        return type;
+    public String getData() {
+        return data;
     }
 
-    public String getData(){
-        return data;
+    public NodeTypes getType() {
+        return type;
     }
 }
